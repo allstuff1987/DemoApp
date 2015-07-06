@@ -1,0 +1,12 @@
+<div class="container">
+	City:
+	<br/>
+	<input type="text" ng-model="city"/>
+	<br/>
+	<ul>
+		<li ng-repeat="cust in customers | filter:city | orderBy:'city'">
+			{{$index + 1}} - {{ cust.name | uppercase }} 
+			lives in {{cust.city}}.
+		</li>
+	</ul>
+</div>

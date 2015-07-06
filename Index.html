@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+	<title>Angular Example</title>
+</head>
+<body>
+	<div>
+	<!-- Placeholder for views -->
+		<div ng-view=""></div>
+	</div>
+
+    <script data-require="angular.js@1.4.1" data-semver="1.4.1" 
+    src="https://code.angularjs.org/1.4.1/angular.js"></script>
+    <script data-require="angular-route@*" data-semver="1.4.1" 
+    src="https://code.angularjs.org/1.4.1/angular-route.js"></script>
+
+	<script type="text/javascript">
+
+	(function (){
+		var demoApp = angular.module('demoApp', ['ngRoute']);
+
+		demoApp.config(function ($routeProvider) {
+			$routeProvider
+			.when('/', 
+			{
+				templateUrl: 'ByCustomer.html',
+				controller: 'SimpleCtrl'
+			})
+			.when('/ByCity', 
+			{
+				templateUrl: 'ByCity.html',
+				controller: 'SimpleCtrl'
+			})
+			.otherwise({ redirectTo: '/' });
+		});
+
+		var SimpleCtrl = function ($scope){
+			$scope.customers = [
+				{name:'John', city:'London'},
+				{name:'Jessie', city:'New York'},
+				{name:'Johanna', city:'Mumbai'},
+				{name:'Joy', city:'Delhi'},
+				{name:'Mary', city:'Paris'},
+				{name:'Peter', city:'London'},
+				{name:'Sebastian', city:'New York'},
+				{name:'Erika', city:'Mumbai'},
+				{name:'Patrick', city:'Delhi'},
+				{name:'Samantha', city:'Paris'}
+			];
+
+			$scope.addCustomer = function () {
+				$scope.customers.push(
+				{ 
+					name: $scope.newCustomer.name,
+					city: $scope.newCustomer.city
+				});
+			}
+		};
+
+		demoApp.controller('SimpleCtrl', SimpleCtrl);
+	})();
+
+	</script>
+</body>
+</html>
